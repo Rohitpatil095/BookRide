@@ -1,0 +1,25 @@
+# Ignore application.properties in all projects
+**/application.properties
+
+# Ignore Maven build output for all projects
+**/target/
+
+# Ignore IDE files for all projects
+**/.idea/
+**/*.iml
+**/.classpath
+**/.project
+**/.settings/
+**/.vscode/
+
+# Ignore logs
+**/*.log
+
+# Ignore Maven wrapper files
+**/.mvn/
+**/mvnw
+**/mvnw.cmd
+
+# OS generated files
+.DS_Store
+Thumbs.db
