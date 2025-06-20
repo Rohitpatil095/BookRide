@@ -1,5 +1,7 @@
 package com.uber.msl.common.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uber.msl.common.constants.ServiceAvailableLocations;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +35,7 @@ public class Driver extends  BaseModel{
 
     @OneToMany(mappedBy = "driver")
     @Fetch(FetchMode.SUBSELECT)
+    @JsonIgnore
     private Set<Booking> bookings;
 
     @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
