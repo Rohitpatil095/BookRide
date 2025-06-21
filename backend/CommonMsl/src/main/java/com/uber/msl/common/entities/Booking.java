@@ -1,5 +1,8 @@
 package com.uber.msl.common.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uber.msl.common.constants.BookingStatus;
 import jakarta.persistence.*;
 import lombok.*;
