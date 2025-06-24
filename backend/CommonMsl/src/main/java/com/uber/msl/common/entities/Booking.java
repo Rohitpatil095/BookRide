@@ -42,4 +42,6 @@ public class Booking extends BaseModel{
 
     @OneToOne(cascade = CascadeType.ALL)
     private ExactLocation endLocation;
+
+    private boolean isRideConfirmed;
 }
