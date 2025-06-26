@@ -40,4 +40,6 @@ public class Driver extends  BaseModel{
 
     @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
     private  Car car;
+
+    private boolean isAvailable;
 }
