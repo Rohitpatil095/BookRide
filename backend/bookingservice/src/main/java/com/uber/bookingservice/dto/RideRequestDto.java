@@ -1,6 +1,5 @@
-package com.uber.notificationsocket.dto;
+package com.uber.bookingservice.dto;
 
-import com.uber.notificationsocket.models.ExactLocation;
 import lombok.*;
 
 import java.util.List;
