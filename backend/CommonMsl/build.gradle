@@ -6,7 +6,9 @@ plugins {
 }
 
 group = 'com.uber.msl.common'
+
 	version = '0.0.7-SNAPSHOT'
+
 
 java {
 	toolchain {
