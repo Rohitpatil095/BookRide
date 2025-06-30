@@ -5,6 +5,7 @@ import com.uber.notificationsocket.dto.RideResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,8 @@ public class DriverNotificationController {
 
     @MessageMapping("/rideResponse")
     public void rideResponseHadler(RideResponseDto rideResponseDto){
-        System.out.println("ride response id "+ rideResponseDto.getRideResponse());
+        System.out.println("i am hitted..");
+        System.out.println("ride response id "+ rideResponseDto.getRideResponse() + " driverId is " + rideResponseDto.getDriverId());
     }
 
 }
