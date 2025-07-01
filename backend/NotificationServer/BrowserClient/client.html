@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <input type="text" id="name" /><br />
+      <button onclick="connect()">Connect</button>
+      <button onclick="submit()">Submit</button>
+      <button onclick="disconnect()" disabled="disabled">Disconnect</button>
+      <ul id="list"></ul>
+    </div>
+
+    <script>
+      var stompClient = null;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        connect();
+      });
+
+      function connect() {
+        var socket = new SockJS("http://localhost:4924/ws");
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function () {
+          console.log("Connected");
+          // stompClient.subscribe("/topic/greeting",function(message){
+          //     console.log("received Message from server is "+ message.body)
+          // })
+
+          stompClient.subscribe("/topic/rideRequest", function (message) {
+            console.log("New ride request " + message.body);
+            const response = confirm(
+              `New ride request  ${JSON.parse(message.body).passengetId}`
+            );
+            // confirm("U have new ride notification request from "+ `{message.body}` + " Please accept the ride..")
+            if (response == true) {
+              const driverId = prompt("enter your id");
+              let responseDto = {
+                driverId: driverId,
+                rideResponse: response,
+              };
+              console.log("response is ", responseDto);
+
+              stompClient.send(
+                `/notification/rideResponse`,
+                {},
+                JSON.stringify(responseDto)
+              );
+            }
+            // console.log(" response is--- ", JSON.stringify(response));
+          });
+        });
+      }
+
+      function submit() {
+        const nameElement = document.getElementById("name").value;
+        stompClient.send(
+          "/app/hello",
+          {},
+          JSON.stringify({ data: nameElement })
+        );
+      }
+      function disconnect() {
+        console.log("disconnect");
+      }
+    </script>
+  </body>
+</html>
