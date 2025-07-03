@@ -36,8 +36,8 @@ public class DriverNotificationController {
         simpMessagingTemplate.convertAndSend("/topic/rideRequest",requestDto);
     }
 
-    @MessageMapping("/rideResponse")
-    public void rideResponseHadler(RideResponseDto rideResponseDto){
+    @MessageMapping("/rideResponse/{userId}")
+    public synchronized void rideResponseHadler(@DestinationVariable String userId, RideResponseDto rideResponseDto){
         System.out.println("i am hitted..");
         System.out.println("ride response id "+ rideResponseDto.getRideResponse() + " driverId is " + rideResponseDto.getDriverId());
     }
